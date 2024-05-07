@@ -3,6 +3,8 @@ package fitness.fitness;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -26,8 +28,14 @@ public class UserController {
 
  @GetMapping("/home")
  public String home(Model model, Principal principal) {
+     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+     boolean isAuthenticated = authentication.isAuthenticated();
+     model.addAttribute("isAuthenticated", isAuthenticated);
   UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
   model.addAttribute("userdetail", userDetails);
+  boolean isAdmin = authentication.getAuthorities().stream()
+  .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+  model.addAttribute("isAdmin", isAdmin);
   return "home";
  }
  @GetMapping("/admin")
