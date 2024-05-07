@@ -1,8 +1,10 @@
 package fitness.fitness;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,30 +12,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
- private UserRepository userRepository;
+    private UserRepository userRepository;
 
- public CustomUserDetailsService(UserRepository userRepository) {
-  super();
-  this.userRepository = userRepository;
- }
+    @Autowired
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
- @Override
- public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("Not Correct");
+        }
+        return new CustomUserDetails(user.getUsername(), user.getPassword(), authorities(user.getRole()), user.getRole());
+    }
 
-  User user = userRepository.findByUsername(username);
-  if (user == null) {
-   throw new UsernameNotFoundException("Username or Password not found");
-  }
-  return new CustomUserDetails(user.getUsername(), user.getPassword(), authorities());
- }
-
- public Collection<? extends GrantedAuthority> authorities() {
-  return Arrays.asList(new SimpleGrantedAuthority("USER"));
- }
-
+    private Collection<? extends GrantedAuthority> authorities(String role) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(role));
+        return authorities;
+    }
 }

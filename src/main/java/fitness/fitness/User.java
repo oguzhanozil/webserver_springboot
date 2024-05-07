@@ -59,6 +59,7 @@ public void setRole(String role)
  public void setPassword(String password) {
   this.password = password;
  }
+ 
 
  
 

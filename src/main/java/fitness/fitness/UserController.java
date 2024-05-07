@@ -30,6 +30,8 @@ public class UserController {
   model.addAttribute("userdetail", userDetails);
   return "home";
  }
+ 
+ 
 
  @GetMapping("/login")
  public String login(Model model, UserDto userDto) {
