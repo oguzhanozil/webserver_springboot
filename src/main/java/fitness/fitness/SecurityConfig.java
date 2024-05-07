@@ -29,7 +29,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .authorizeRequests()
             .requestMatchers("/register").permitAll()
             .requestMatchers("/home").permitAll()
-            .requestMatchers("/admin").hasRole("ADMIN")
+            .requestMatchers("/admin/**").hasRole("ADMIN")
             .anyRequest().authenticated()
         .and()
         .formLogin()

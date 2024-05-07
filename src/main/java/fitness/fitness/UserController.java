@@ -30,7 +30,11 @@ public class UserController {
   model.addAttribute("userdetail", userDetails);
   return "home";
  }
- 
+ @GetMapping("/admin")
+ public String admin(Model model, UserDto userDto){
+    return "admin";
+    
+ }
  
 
  @GetMapping("/login")

@@ -18,12 +18,18 @@
     </header>
     <div class="dashboard_user">
       <h2 class="dashboard_user_name">{{userdetail.username}}</h2>
-  </div>
-  <div class="span-text">
-    {{#isAuthenticated}}
-        <span style="color: white;"><a href="/logout">Logout</a></span>
+      {{#isAuthenticated}}
+      <span style="color: rgb(251, 1, 1);"><a href="/logout">Logout</a></span>
+      {{#isAdmin}}
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Admin Page</a>
+        </li>
+      {{/isAdmin}}
     {{/isAuthenticated}}
-</div>
+  </div>
+  
+
+
     <nav class="navbar navbar-expand-lg navbar-dark sticky">
       <div class="container">
         <ul class="navbar-nav mr-auto">
@@ -41,6 +47,7 @@
           </li>
           <!-- Add other menu items -->
         </ul>
+      
       </div>
     </nav>
 
