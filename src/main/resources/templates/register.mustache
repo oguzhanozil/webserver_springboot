@@ -15,11 +15,7 @@
     </header>
 
     <div class="container">
-        {{#param.success}}
-        <div class="success-message">
-            <p>Registration Successful!</p>
-        </div>
-        {{/param.success}}
+     
         <section id="register" class="py-4">
             <div class="container">
                 <h2>Register</h2>
@@ -37,9 +33,23 @@
                     <button type="submit" class="btn btn-primary mr-2">Register</button>
                     <a href="/login" class="btn btn-secondary">Login</a>
                 </form>
-            </div>
+                {{#success}}
+                <div class="success-message">
+                <p>{{success}}</p>
+                </div>
+               {{/success}}
+
+               {{#error}}
+               <div class="error-message">
+                  <p>{{error}}</p>
+               </div>
+               {{/error}}
+               
+                
         </section>
     </div>
+               
+            </div>
 
     <footer>
         <div class="container">

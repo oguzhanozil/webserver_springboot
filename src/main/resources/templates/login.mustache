@@ -53,7 +53,13 @@
               >Register Here!</a
             >
           </form>
+          {{#error}}
+        <div class="error-message">
+           <p>{{error}}</p>
         </div>
+        {{/error}}
+        </div>
+        
       </section>
     </div>
 

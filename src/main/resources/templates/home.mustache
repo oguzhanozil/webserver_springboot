@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fitness Management System</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -43,7 +43,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#payment">Payment Processing</a>
           </li>
-          <!-- Add other menu items -->
+         
         </ul>
       
       </div>
@@ -94,7 +94,17 @@
 
           <!-- Change Password Form -->
           <h3>Change Password</h3>
-          <form id="changePasswordForm">
+          <form id="change-password"  name = "change-password" action = "/change-password" method="post">
+            <div class="form-group">
+              <label for="oldPassword">Enter Old Password:</label>
+              <input
+                type="password"
+                class="form-control"
+                id="oldPassword"
+                name="oldPassword"
+                required
+              />
+            </div>
             <div class="form-group">
               <label for="newPassword">Enter New Password:</label>
               <input
@@ -105,23 +115,18 @@
                 required
               />
             </div>
-            <div class="form-group">
-              <label for="confirmPassword">Confirm New Password:</label>
-              <input
-                type="password"
-                class="form-control"
-                id="confirmPassword"
-                name="confirmPassword"
-                required
-              />
-            </div>
             <button type="submit" class="btn btn-primary">
               Change Password
             </button>
+            {{#error}}
+            <div class="error-message">
+               <p>{{error}}</p>
+            </div>
+            {{/error}}
           </form>
 
           <h3>Change Payment Method</h3>
-          <form id="changePaymentMethodForm">
+          <form id="changePaymentMethodForm" action="/change-payment" method="post" role="form">
             <div class="form-group">
               <label for="paymentMethod">Select Payment Method:</label>
               <select
@@ -131,9 +136,9 @@
                 required
               >
                 <option value="">Select Payment Method</option>
-                <option value="cash">Cash</option>
-                <option value="creditCard">Credit Card</option>
-                <option value="crypto">Crypto</option>
+                <option value="cash" name="cash" id="cash">Cash</option>
+                <option value="creditCard" name="Credit Card" id="Credit Card" >Credit Card</option>
+                <option value="crypto" name="Cyrpto" id="Crypto" >Crypto</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary">
@@ -148,7 +153,7 @@
         <!-- Attendance tracking section goes here -->
       </section>
 
-      <section id="class-schedule" class="py-4">
+      <section id="class-schedule"  class="py-4">
         <div class="container">
           <h2>Class Schedule</h2>
 
@@ -156,21 +161,43 @@
           <div class="class">
             <h3>Gym Class</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button onclick="signUp('Gym Class')">Sign Up</button>
+            <form action="/sign-up" method="post">
+              <input type="hidden" name="class" value="Gym Class">
+              <button type="submit">Sign Up</button>
+            </form>
+            <form action="/sign-out" method="post">
+              <input type="hidden" name="class" value="Gym Class">
+              <button type="submit">Sign out</button>
+            </form>
           </div>
 
           <!-- Yoga Class -->
           <div class="class">
             <h3>Yoga Class</h3>
             <p>Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <button onclick="signUp('Yoga Class')">Sign Up</button>
+            <form action="/sign-up" method="post">
+              <input type="hidden" name="class" value="Yoga Class">
+              <button type="submit">Sign Up</button>
+            </form>
+            <form action="/sign-out" method="post">
+              <input type="hidden" name="class" value="Yoga Class">
+              <button type="submit">Sign out</button>
+            </form>
+            
           </div>
 
           <!-- Pilates Class -->
           <div class="class">
             <h3>Pilates Class</h3>
             <p>Cras mattis consectetur purus sit amet fermentum.</p>
-            <button onclick="signUp('Pilates Class')">Sign Up</button>
+            <form action="/sign-up" method="post">
+              <input type="hidden" name="class" value="Pilates Class">
+              <button type="submit">Sign Up</button>
+            </form>
+            <form action="/sign-out" method="post">
+              <input type="hidden" name="class" value="Pilates Class">
+              <button type="submit">Sign out</button>
+            </form>
           </div>
         </div>
       </section>
